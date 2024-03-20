@@ -4,22 +4,25 @@
 import PackageDescription
 
 let package = Package(
-    name: "SwiftPolyglot",
-    products: [
-        .executable(name: "swiftpolyglot", targets: ["SwiftPolyglot"]),
-    ],
-    targets: [
-        .executableTarget(
-            name: "SwiftPolyglot",
-            dependencies: ["SwiftPolyglotCore"]
-        ),
-        .target(name: "SwiftPolyglotCore"),
-        .testTarget(
-            name: "SwiftPolyglotCoreTests",
-            dependencies: ["SwiftPolyglotCore"],
-            resources: [
-                .copy("TestFiles"),
-            ]
-        ),
-    ]
+	name: "SwiftPolyglot",
+	products: [
+		.executable(name: "swiftpolyglot", targets: ["SwiftPolyglot"]),
+	],
+	targets: [
+		.executableTarget(
+			name: "SwiftPolyglot",
+			dependencies: ["SwiftPolyglotCore"],
+			swiftSettings: [
+				.enableExperimentalFeature("StrictConcurrency")
+			]
+		),
+		.target(name: "SwiftPolyglotCore"),
+		.testTarget(
+			name: "SwiftPolyglotCoreTests",
+			dependencies: ["SwiftPolyglotCore"],
+			resources: [
+				.copy("TestFiles")
+			]
+		)
+	]
 )
